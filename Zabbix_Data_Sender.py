@@ -3,14 +3,16 @@ import Adafruit_DHT
 import os
 
 ### Enter the IP/Hostname of your Zabbix Server here ###
-
 ip = 
 
 ### Enter the hostname of the Pi running the script here ###
-
 hostname = 
 
+### Enter the pin of the AM2302 Temp Sensor Here ###
 pin = 17
+
+
+
 key1 = 'Temp'
 key2 = 'Hum'
 x = 0
@@ -23,8 +25,8 @@ try:
     syslog.syslog("***** TEMP={} HUMIDITY={} *****".format(tem_f,hum))
     print("Temp: {}".format(tem_f))
     print("Humidity: {}".format(hum))
-    os.system('zabbix_sender -z 10.0.0.11 -s "M-RPIZ-01" -k {} -o {}'.format(ip,hostname,key1,float(tem_f)))
-    os.system('zabbix_sender -z 10.0.0.11 -s "M-RPIZ-01" -k {} -o {}'.format(ip,hostname,key2, float(hum)))
+    os.system('zabbix_sender -z {} -s {} -k {} -o {}'.format(ip,hostname,key1,float(tem_f)))
+    os.system('zabbix_sender -z {} -s {} -k {} -o {}'.format(ip,hostname,key2, float(hum)))
     syslog.syslog('***** FINISHED TEMP/HUMID GATHERING *****')
 
 except Exception as e:
