@@ -9,8 +9,7 @@ ip =
 hostname = 
 
 ### Enter the pin of the AM2302 Temp Sensor Here ###
-pin = 17
-
+pin = 
 
 
 key1 = 'Temp'
